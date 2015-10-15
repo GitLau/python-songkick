@@ -85,6 +85,7 @@ class SongkickConnection(object):
         return SetlistQuery(self)
 
     # Users
+    @property
     def user_gigography(self):
         return UserGigographyQuery(self)
 
