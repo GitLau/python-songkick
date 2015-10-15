@@ -50,7 +50,7 @@ See TODO for pagination plans.
 ::
    
     # query for 10 coltrane motion events, no earlier than 1/1/2009
-    events = songkick.events.query(artist_name='coltrane motion',
+    events = songkick.event_search.query(artist_name='coltrane motion',
                                    per_page=10,
 				   min_date=date(2009, 1, 1))
     
@@ -58,7 +58,7 @@ See TODO for pagination plans.
     for event in events:
     	print event.display_name	# Coltrane Motion at Arlene's Grocery (June 2, 2010)
 	print event.location.city	# New York, NY, US
-	print event.venue.display_name	# Arlene's Grocery
+	print event.venue.display_name	# Arlene's Grocery 
 
 Querying for gigographies
 ~~~~~~~~~~~~~~~~~~~~~~~~~
