@@ -1,6 +1,6 @@
-from songkick.base import SongkickModel
-from songkick.events.models import SongkickArtistIdentifier
-from songkick import fields
+from ..base import SongkickModel
+from ..events import models as event_models
+from .. import fields
 
 
 class SongkickSetlistItem(SongkickModel):
@@ -29,7 +29,7 @@ class SongkickSetlistArtist(SongkickModel):
     id = fields.Field()
     display_name = fields.Field(mapping='displayName')
     songkick_uri = fields.Field(mapping='uri')
-    identifiers = fields.ListField(fields.ObjectField(SongkickArtistIdentifier))
+    identifiers = fields.ListField(fields.ObjectField(event_models.SongkickArtistIdentifier))
 
 
 class SongkickSetlist(SongkickModel):

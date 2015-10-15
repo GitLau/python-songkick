@@ -1,5 +1,5 @@
-from songkick.query import SongkickQuery
-from songkick.setlists.models import SongkickSetlist
+from ..query import SongkickQuery
+from .models import SongkickSetlist
 
 
 class SetlistQuery(SongkickQuery):

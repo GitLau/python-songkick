@@ -1,5 +1,5 @@
-from songkick.base import SongkickModel
-from songkick import fields
+from ..base import SongkickModel
+from .. import fields
 
 
 class SongkickArtistIdentifier(SongkickModel):
@@ -27,8 +27,7 @@ class SongkickArtist(SongkickModel):
     :param display_name: Artist name, eg, "Neil Young".
     :param songkick_uri: Songkick artist detail uri
     :param identifiers: A list of :class:`SongkickArtistIdentifier` objects
-    :param billing: Event billing status. 'headline' or 'support'.
-    :param billing_index: Numerical position on the bill
+    :param on_tour_until: On tour end date
     """
     
     id = fields.Field()
@@ -36,8 +35,7 @@ class SongkickArtist(SongkickModel):
     songkick_uri = fields.Field(mapping='artist__uri')
     identifiers = fields.ListField(fields.ObjectField(SongkickArtistIdentifier),
                                    mapping='artist__identifier')
-    billing = fields.Field()
-    billing_index = fields.Field(mapping='billingIndex')
+    on_tour_until = fields.Field(mapping='onTourUntil')
 
     def __repr__(self):
         return self.display_name.encode('utf-8')
@@ -85,24 +83,57 @@ class SongkickMetroArea(SongkickModel):
     country = fields.Field(mapping='country__displayName')
 
 
+class SongkickCity(SongkickModel):
+    """Event City
+
+    :param id: Songkick id
+    :param display_name: Venue name
+    :param country: Country name
+    :param uri: Songkick venue data uri
+    """
+
+    id = fields.Field()
+    display_name = fields.Field(mapping='displayName')
+    country = fields.Field(mapping='country__displayName')
+    uri = fields.Field()
+
+    def __repr__(self):
+        return self.display_name.encode('utf-8')
+
+
 class SongkickVenue(SongkickModel):
     """Event venue.
 
     :param id: Songkick id
     :param display_name: Venue name
+    :param street: Street name
+    :param zip: Zip Code
+    :param phone: Phone Number
+    :param website: Website
+    :param description: Description
+    :param capacity: Capacity
     :param latitude: Venue latitude
     :param longitude: Venue longitude
     :param metro_area: The :class:`SongkickMetroArea` describing this
                        venue's location
+    :param city: The :class:`SongkickCity` describing this
+                       city
     :param uri: Songkick venue data uri
     """
-    
+
     id = fields.Field()
     display_name = fields.Field(mapping='displayName')
+    street = fields.Field()
+    zip = fields.Field()
+    phone = fields.Field()
+    website = fields.Field()
+    description = fields.Field()
+    capacity = fields.Field()
     latitude = fields.Field(mapping='lat')
     longitude = fields.Field(mapping='lng')
     metro_area = fields.ObjectField(SongkickMetroArea,
                                     mapping='metroArea')
+    city = fields.ObjectField(SongkickCity)
     uri = fields.Field()
 
     def __repr__(self):
@@ -141,6 +172,7 @@ class SongkickEvent(SongkickModel):
     id = fields.Field()
     status = fields.Field()
     event_type = fields.Field(mapping='type')
+    age_restriction = fields.Field(mapping='ageRestriction')
     series = fields.ObjectField(SongkickEventSeries)
     venue = fields.ObjectField(SongkickVenue)
     location = fields.ObjectField(SongkickLocation)

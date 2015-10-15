@@ -1,7 +1,5 @@
 import json
-from math import ceil
-
-from songkick.exceptions import SongkickDecodeError
+from .exceptions import SongkickDecodeError
 
 
 class SongkickQuery(object):

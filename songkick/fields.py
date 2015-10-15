@@ -1,10 +1,8 @@
 from datetime import date
 from decimal import Decimal
 from time import strptime
-
 from dateutil.parser import parse as dateutil_parse
-
-from songkick.base import BaseField
+from .base import BaseField
 
 
 class Field(BaseField):

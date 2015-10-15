@@ -2,10 +2,16 @@ import urllib
 import urlparse
 
 import httplib2
+import warnings
 
-from songkick.events.query import EventQuery, GigographyQuery
-from songkick.exceptions import SongkickRequestError
-from songkick.setlists.query import SetlistQuery
+from .events.query import EventQuery
+from .artists.query import ArtistGigographyQuery, ArtistCalendar, ArtistSearch, SimilarArtist
+from .users.query import UserGigographyQuery
+from .locations.query import LocationQuery
+from .exceptions import SongkickRequestError
+from .setlists.query import SetlistQuery
+from .venues.query import VenueSearch, VenueEvents, VenueDetails
+from .metro_areas.query import MetroAreaCalendar
 
 
 class SongkickConnection(object):
@@ -29,7 +35,7 @@ class SongkickConnection(object):
         response, content = self._http.request(url, method, body, headers)
 
         if int(response.status) != 200:
-            raise SongkickRequestError('Could not load %s: [%s] %s' % \
+            raise SongkickRequestError('Could not load %s: [%s] %s' %
                                        (url, response.status,
                                         response.reason))
         return content
@@ -51,17 +57,73 @@ class SongkickConnection(object):
         
         return url
 
+    # Venues
+    @property
+    def venue_search(self):
+        return VenueSearch(self)
+
+    @property
+    def venue_details(self):
+        return VenueDetails(self)
+
+    @property
+    def venue_events(self):
+        return VenueEvents(self)
+
+    # Metro Areas
+    @property
+    def metro_area_events(self):
+        return MetroAreaCalendar(self)
+
+    # Events
+    @property
+    def event_search(self):
+        return EventQuery(self)
+
+    @property
+    def event_setlists(self):
+        return SetlistQuery(self)
+
+    # Users
+    def user_gigography(self):
+        return UserGigographyQuery(self)
+
+    # Artists
+    @property
+    def artist_gigography(self):
+        return ArtistGigographyQuery(self)
+
+    @property
+    def artist_events(self):
+        return ArtistCalendar(self)
+
+    @property
+    def artist_search(self):
+        return ArtistSearch(self)
+
+    @property
+    def artists_similar(self):
+        return SimilarArtist(self)
+
+    # Locations
+    @property
+    def artists_similar(self):
+        return LocationQuery(self)
+
+    # Deprecated
     @property
     def events(self):
+        warnings.warn("deprecated", DeprecationWarning)
         return EventQuery(self)
 
     @property
     def gigography(self):
-        return GigographyQuery(self)
+        warnings.warn("deprecated", DeprecationWarning)
+        return ArtistGigographyQuery(self)
 
     @property
     def setlists(self):
+        warnings.warn("deprecated", DeprecationWarning)
         return SetlistQuery(self)
-
 
 
