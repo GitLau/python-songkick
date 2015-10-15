@@ -18,7 +18,7 @@ class UserGigographyQuery(SongkickQuery):
 # "calendarEntry": [
 #           {"reason": {
 #               "trackedArtist": [ARTIST, ARTIST],
-#               "attendance": "i_might_go|im_going”
+#               "attendance": "i_might_go|im_going"
 #            },
 #            "event": {EVENT}
 #           }]

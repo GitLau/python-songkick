@@ -30,7 +30,7 @@ class SongkickArtist(SongkickModel):
     :param on_tour_until: On tour end date
     """
     
-    id = fields.Field()
+    id = fields.Field(mapping='artist__id')
     display_name = fields.Field(mapping='displayName')
     songkick_uri = fields.Field(mapping='artist__uri')
     identifiers = fields.ListField(fields.ObjectField(SongkickArtistIdentifier),
