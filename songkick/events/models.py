@@ -20,7 +20,7 @@ class SongkickArtistIdentifier(SongkickModel):
     musicbrainz_id = fields.Field(mapping='mbid')
 
 
-class SongkickArtist(SongkickModel):
+class SongkickArtistInEvent(SongkickModel):
     """A Songkick-described artist.
 
     :param id: Songkick id
@@ -176,7 +176,7 @@ class SongkickEvent(SongkickModel):
     series = fields.ObjectField(SongkickEventSeries)
     venue = fields.ObjectField(SongkickVenue)
     location = fields.ObjectField(SongkickLocation)
-    artists = fields.ListField(fields.ObjectField(SongkickArtist),
+    artists = fields.ListField(fields.ObjectField(SongkickArtistInEvent),
                                mapping='performance')
     display_name = fields.Field(mapping='displayName')
     popularity = fields.DecimalField()
