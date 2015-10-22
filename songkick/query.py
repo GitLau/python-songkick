@@ -30,8 +30,11 @@ class SongkickQuery(object):
         # pull objects from response
         object_list = results_wrapper.get(cls.ResponseEnclosure)
 
-        for obj in object_list:
-            yield cls.ResponseClass._from_json(obj)
+        if isinstance(object_list, dict):
+            yield cls.ResponseClass._from_json(object_list)
+        else:
+            for obj in object_list:
+                yield cls.ResponseClass._from_json(obj)
 
     def get_api_path(self):        
         raise NotImplementedError
