@@ -15,7 +15,7 @@ class SongkickQuery(object):
         
         try:
             data = json.loads(event_data)
-        except Exception, exc:
+        except Exception as exc:
             msg = "Couldn't decode response: %s" % exc
             raise SongkickDecodeError(msg)
 
