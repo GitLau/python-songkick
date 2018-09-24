@@ -52,7 +52,7 @@ class SongkickConnection(object):
         # break down the url into its components, inject args
         # as query string and recombine the url
         url_parts = list(urllib.parse.urlparse(url))
-        url_parts[4] = urllib.urlencode(request_args)
+        url_parts[4] = urllib.parse.urlencode(request_args)
         url = urllib.parse.urlunparse(url_parts)
         
         return url
