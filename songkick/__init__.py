@@ -1,4 +1,4 @@
-from connection import SongkickConnection as Songkick
+from .connection import SongkickConnection as Songkick
 
 
 __author__ = 'Matt Dennewitz and David Renne'
