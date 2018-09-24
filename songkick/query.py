@@ -59,5 +59,5 @@ class SongkickQuery(object):
         sk_data = self._connection.make_request(url)
 
         # parse response
-        return sk_data #self.parse_songkick_data(sk_data)
+        return json.loads(sk_data) #self.parse_songkick_data(sk_data)
 
