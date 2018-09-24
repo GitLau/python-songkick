@@ -1,5 +1,5 @@
 import urllib
-import urlparse
+#import urlparse
 
 import httplib2
 import warnings
@@ -47,13 +47,13 @@ class SongkickConnection(object):
         request_args['apikey'] = self.api_key
 
         # construct the complete api resource url, minus args
-        url = urlparse.urljoin(SongkickConnection.ApiBase, api_path)
+        url = urllib.parse.urljoin(SongkickConnection.ApiBase, api_path)
 
         # break down the url into its components, inject args
         # as query string and recombine the url
-        url_parts = list(urlparse.urlparse(url))
+        url_parts = list(urllib.parse.urlparse(url))
         url_parts[4] = urllib.urlencode(request_args)
-        url = urlparse.urlunparse(url_parts)
+        url = urllib.parse.urlunparse(url_parts)
         
         return url
 
