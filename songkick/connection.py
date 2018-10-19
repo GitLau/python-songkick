@@ -28,6 +28,8 @@ class SongkickConnection(object):
         This could stand to be a little more robust, but Songkick's API
         is very straight-forward: 200 is a success, anything else is wrong.
         """
+        ### DEBUGGING ###
+        print(url)
 
         headers = headers or {}
         headers['Accept-Charset'] = 'utf-8'
